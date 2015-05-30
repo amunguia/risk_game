@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = RiskGame::VERSION
   spec.authors       = ["Alejandro Munguia"]
   spec.email         = ["munguia.jandro@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{This gem handles logic for a risk game.}
+  spec.description   = %q{This gem handles logic for a risk game.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
