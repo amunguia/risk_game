@@ -6,7 +6,7 @@ module Risk::Game
     end
 
 
-    describe "#adjacent_to" do 
+    describe ".adjacent_to" do 
       it "throws an exception if the country does not exist" do 
         expect{ @board.adjacent_to :fake_country }.to raise_error(CountryDoesNotExist)
       end
@@ -17,7 +17,7 @@ module Risk::Game
 
     end
 
-    describe "#countries" do 
+    describe ".countries" do 
       it "returns an array of symbols" do 
         expect(@board.countries).to be_kind_of(Array)
       end
@@ -27,7 +27,7 @@ module Risk::Game
       end
     end
 
-    describe "#name_for" do 
+    describe "name_for" do 
       it "throws an exception if the country does not exist" do 
         expect{ @board.name_for :fake_country }.to raise_error(CountryDoesNotExist)
       end
