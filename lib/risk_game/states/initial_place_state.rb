@@ -15,6 +15,8 @@ module Risk
         else
           game.next_player
           game.players_to_setup -= 1
+          game.max_place = Game::INITIAL_ARMIES
+          
           if game.players_to_setup > 0
             InitialPlaceState.new
           else

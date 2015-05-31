@@ -17,18 +17,17 @@ module Risk
         game
       end
 
-      #The accessors are use by various game states to store
-      #relevant details they need to operate.
       attr_accessor :max_place, :minimum_move, :players_to_setup, :won
 
+      INITIAL_ARMIES = 20
+
       def initialize
-        @max_place, @minimum_move = 0, 0
+        @max_place, @minimum_move = INITIAL_ARMIES, 0
         @cards = {}
         @card_list = Cards.card_list.join ","
         @players = []
         @players_to_setup = 0
         @won = false
-
         initial_army_map
       end
 

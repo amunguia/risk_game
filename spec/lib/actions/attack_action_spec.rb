@@ -44,9 +44,9 @@ module Risk::Game
 
     describe ".execute_on" do 
       before :each do 
-        @game = Game.new
-        @game.place_armies_in(:alaska, 10)
-        @game.place_armies_in(:kamchatka, 2)
+        @game = Game.create_with_players [1,2,3]
+        @game.place_armies_in(:alaska, 9)  
+        @game.place_armies_in(:kamchatka, 1)
 
         allow(Attack).to receive(:run_attack).and_return([1,1])
       end

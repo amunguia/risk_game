@@ -62,6 +62,11 @@ module Risk::Game
             @state.update(@action, @game)
             expect(@game.players_to_setup).to be (players_left - 1)
           end
+
+          it "sets max_place to INITIAL_ARMIES" do 
+            @state.update(@action, @game)
+            expect(@game.max_place).to be Game::INITIAL_ARMIES
+          end
         end
         
         context "no more players remain to place" do 
