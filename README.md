@@ -1,6 +1,6 @@
 # RiskGame
 
-TODO: Write a gem description
+This gem handles logic for running a risk game.
 
 ## Installation
 

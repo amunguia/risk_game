@@ -83,6 +83,13 @@ module Risk::Game
           expect(@game.won).to be false
         end
 
+        it "sets max_place to number of armies next player has available" do
+          allow(@game).to receive(:current_player).and_return(1)
+          allow(@game).to receive(:armies_for).with(1).and_return([:alaska, :argentina])
+          @attack_state.update(@action, @game)
+          expect(@game.max_place).to be 3
+        end
+
 
         context "MovedAction played" do 
           before :each do 

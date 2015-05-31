@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Alejandro Munguia"]
   spec.email         = ["munguia.jandro@gmail.com"]
   spec.summary       = %q{This gem handles logic for a risk game.}
-  spec.description   = %q{This gem handles logic for a risk game.}
+  spec.description   = %q{This gem handles logif for a risk game.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
