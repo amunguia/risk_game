@@ -2,16 +2,9 @@ module Risk
 
   module Game
 
-    class Board
- 
-      attr_reader :adjacent_map
+    module Board
 
-      def initialize
-        build_adjacent_map
-        build_name_map
-      end
-
-      def adjacent_to country
+      def self.adjacent_to country
         if @adjacent_map.keys.include? country
           @adjacent_map[country]
         else
@@ -19,11 +12,11 @@ module Risk
         end
       end
 
-      def countries
+      def self.countries
         @adjacent_map.keys
       end
 
-      def name_for country
+      def self.name_for country
         if @name_map.keys.include? country 
           @name_map[country]
         else
@@ -33,7 +26,7 @@ module Risk
 
       private 
 
-      def build_adjacent_map
+      def self.build_adjacent_map
         @adjacent_map = {
             :alaska => [:kamchatka, :northwest_te, :alberta],
             :alberta => [:alaska, :northwest_te, :western_us, :ontario],
@@ -85,7 +78,7 @@ module Risk
         }
       end
 
-      def build_name_map
+      def self.build_name_map
         @name_map = {
             :alaska => "Alaska",
             :alberta => "Alberta",
@@ -137,6 +130,8 @@ module Risk
         }
       end
 
+      build_name_map
+      build_adjacent_map
     end
 
   end
