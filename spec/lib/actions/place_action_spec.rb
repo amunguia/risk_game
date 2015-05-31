@@ -24,6 +24,15 @@ module Risk::Game
       end
     end
 
+    describe ".execute_on" do 
+      it "increases the number of armies in the country being placed into" do 
+        game = Game.new
+        starting_count = game.armies_in(:alaska)
+        @place_action.execute_on(game)
+        expect(game.armies_in(:alaska)).to be (starting_count + 5)
+      end
+    end
+
     describe ".reset" do
       
       it "sets max_place on the game to 0" do 

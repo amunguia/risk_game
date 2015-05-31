@@ -11,6 +11,12 @@ module Risk
         @cards_to_use = cards_to_use
       end
 
+      def execute_on(game)
+        game.max_place += value_for_cards
+        update_cards(game)
+        true
+      end
+
       def valid_on?(game)
         player_has_cards(game)
       end
@@ -25,6 +31,21 @@ module Risk
           end
         end
         true
+      end
+
+      def update_cards(game)
+        cards = game.cards_for_player(by_user).delete_if do |card|
+          cards_to_use.include? card
+        end
+        game.set_cards_for_player(by_user, cards)
+      end
+
+      def value_for_cards
+        value = 0
+        cards_to_use.each do |c|
+          value += Cards.card_value c 
+        end
+        value
       end
  
     end

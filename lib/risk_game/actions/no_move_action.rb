@@ -4,6 +4,10 @@ module Risk
 
     class NoMoveAction < Action 
 
+      def execute_on(game)
+        true
+      end
+
       def valid_on?(game)
         true
       end

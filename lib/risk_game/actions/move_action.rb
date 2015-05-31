@@ -12,6 +12,12 @@ module Risk
           @number_armies = number_armies
         end
 
+        def execute_on(game)
+          game.place_armies_in(destination_country, number_armies)
+          game.place_armies_in(source_country, -1 * number_armies)
+          true
+        end
+
         def reset(game)
           game.minimum_move = 0
           game

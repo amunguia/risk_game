@@ -18,6 +18,28 @@ module Risk::Game
       end
     end
 
+    describe ".execute_on" do 
+      before :each do 
+        @game = Game.new
+      end
+
+      it "increases the number of armies in the destination country" do 
+        starting_count = @game.armies_in :kamchatka
+        @move_action.execute_on(@game)
+        expect(@game.armies_in :kamchatka).to eq (starting_count + 3)
+      end
+
+      it "decreases the number of armies in the source country" do 
+        starting_count = @game.armies_in :alaska
+        @move_action.execute_on(@game)
+        expect(@game.armies_in :alaska).to eq (starting_count - 3)
+      end
+
+      it "returns true" do 
+        expect(@move_action.execute_on @game).to be true
+      end
+    end
+
     describe ".reset" do 
       it "sets the minimum_move on the game to 0" do   
         game = Game.new

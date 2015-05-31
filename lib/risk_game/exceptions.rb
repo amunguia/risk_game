@@ -5,6 +5,9 @@ module Risk
     class CountryDoesNotExist < Exception
     end
 
+    class NotACard < Exception
+    end
+
   end
 
 end
