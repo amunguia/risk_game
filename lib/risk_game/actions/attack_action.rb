@@ -26,6 +26,9 @@ module Risk
 
         if game.won
           game.set_owner_of(defending_country, attacker)
+          if !game.assignment_map.values.include?(defender)
+            game.players.delete(defender)
+          end
         end
       end
 

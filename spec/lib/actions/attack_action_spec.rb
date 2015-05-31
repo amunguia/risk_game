@@ -92,6 +92,14 @@ module Risk::Game
         @attack_action.execute_on @game
         expect(@game.owner_of(:kamchatka)).to be 1
       end
+
+      it "removes player from players list if they lost last country" do 
+        @game.assignment_map = {"alaska" => 1, "alberta" => 1}
+        allow(Attack).to receive(:run_attack).and_return([1,2])
+        @attack_action.execute_on @game
+        expect(@game.players).to_not include(2)
+      end
+
     end
 
     describe ".valid_on?" do 
