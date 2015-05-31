@@ -24,6 +24,7 @@ module Risk
 
           game.next_player
           game.won = false
+          game.max_place  = game.armies_for(game.current_player)
           TurnStartState.new
         else
           nil

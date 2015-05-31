@@ -45,7 +45,11 @@ module Risk
         self.army_map[country]
       end
 
-      def assignment_map
+      def armies_for(player_id)
+        Board.points_for self.assignment_map.select {|key, value| value == player_id}.keys
+      end
+
+      def build_assignment_map
         countries = Board.countries.shuffle
         ps = players
 

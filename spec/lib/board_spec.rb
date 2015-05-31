@@ -51,6 +51,12 @@ module Risk::Game
       end 
     end
 
+    #describe "points_for" do 
+    #  it "returns an integer for number of points" do 
+    #    ex
+    #  end
+    #end
+
   end
 
 end

@@ -78,7 +78,7 @@ module RiskGame
     end
 
     def armies_for(player_id)
-
+      Board.points_for self.assignment_map.select {|key, value| value == player_id}.keys
     end
 
     def assignment_map

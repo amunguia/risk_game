@@ -23,7 +23,7 @@ module Risk
           game.set_cards_for_player(p, [])
         end
 
-        game.assignment_map
+        game.build_assignment_map
         game
       end
 

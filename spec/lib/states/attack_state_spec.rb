@@ -85,7 +85,7 @@ module Risk::Game
 
         it "sets max_place to number of armies next player has available" do
           allow(@game).to receive(:current_player).and_return(1)
-          allow(@game).to receive(:armies_for).with(1).and_return([:alaska, :argentina])
+          @game.assignment_map = {"alaska" => 1, "alberta" => 1}
           @attack_state.update(@action, @game)
           expect(@game.max_place).to be 3
         end
