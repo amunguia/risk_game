@@ -36,6 +36,10 @@ module Risk::Game
       end
     end
 
+    describe ".execute_on" do 
+
+    end
+
     describe ".valid_on?" do 
 
       before :each do 
@@ -76,6 +80,11 @@ module Risk::Game
         it "returns false if number of armies in attacking country less than number attacking with - 1" do 
           allow(@game).to receive(:armies_in).with(:alaska).and_return(3)
           expect(@attack_action.valid_on? @game).to be false
+        end
+
+        it "returns false if attacking with greater than 3 armies" do 
+          action = AttackAction.new(1, 2, :alaska, :kamchatka, 5)
+          expect(action.valid_on? @game).to be false
         end
    
         it "returns false if attack_with < 1" do 

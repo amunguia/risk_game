@@ -17,6 +17,7 @@ module Risk
       def valid_on?(game)
         (attacker != defender) &&
         (attack_with > 0) &&
+        (attack_with <= 3) &&
         (Board.countries.include? attacking_country) &&
         (Board.countries.include? defending_country) &&
         (Board.are_adjacent?(attacking_country, defending_country)) && 
