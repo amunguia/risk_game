@@ -10,16 +10,16 @@ module Risk
         a_length, d_length = attacker_dice.length, defender_dice.length
         shorter_length = (a_length < d_length)? a_length : d_length
         
-        wins = [0,0]
+        losses = [0,0]
         shorter_length.times do |i|
           if (attacker_dice[i] > defender_dice[i])
-            wins[1] += 1
+            losses[1] += 1
           else
-            wins[0] += 1
+            losses[0] += 1
           end
         end
 
-        wins
+        losses
       end
 
       def self.roll_dice(number)

@@ -21,8 +21,12 @@ module Risk
         game.place_armies_in(attacking_country, -attacker_losses)
         game.place_armies_in(defending_country, -defender_losses)
 
-        self.won = attacker_losses < defender_losses
+        self.won = game.armies_in(defending_country) == 0
         game.won = self.won
+
+        if game.won
+          game.set_owner_of(defending_country, attacker)
+        end
       end
 
       def valid_on?(game)

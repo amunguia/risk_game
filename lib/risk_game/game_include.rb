@@ -100,6 +100,10 @@ module Risk
         self.players = players
       end
 
+      def set_owner_of(country, player)
+        self.assignment_map[country] = player
+      end
+
       private 
 
       def initial_army_map

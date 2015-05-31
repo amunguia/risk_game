@@ -61,16 +61,36 @@ module Risk::Game
         expect(@game.armies_in :kamchatka).to be (1)
       end
 
-      it "sets attack.won to true if the attacker wins" do
+      it "sets game.won to true if the attacker wins country" do
         allow(Attack).to receive(:run_attack).and_return([1,2])
         @attack_action.execute_on @game
         expect(@game.won).to be true
       end
 
-      it "it sets game.won to true if attacker wins" do 
+      it "it sets attack.won to true if attacker wins country" do 
         allow(Attack).to receive(:run_attack).and_return([1,2])
         @attack_action.execute_on @game
         expect(@attack_action.won).to be true
+      end
+
+      it "does not set attack.won if the attacker does not win country" do 
+        @game.place_armies_in(:kamchatka, 5)
+        allow(Attack).to receive(:run_attack).and_return([1,2])
+        @attack_action.execute_on @game
+        expect(@attack_action.won).to be false
+      end
+
+      it "does not set attack.won if the attacker does not win country" do 
+        @game.place_armies_in(:kamchatka, 5)
+        allow(Attack).to receive(:run_attack).and_return([1,2])
+        @attack_action.execute_on @game
+        expect(@game.won).to be false
+      end
+
+      it "changes owner of country if attacker wins" do 
+        allow(Attack).to receive(:run_attack).and_return([1,2])
+        @attack_action.execute_on @game
+        expect(@game.owner_of(:kamchatka)).to be 1
       end
     end
 
