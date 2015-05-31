@@ -6,6 +6,7 @@ require "risk_game/actions/place_action.rb"
 require "risk_game/actions/use_cards_action.rb"
 require "risk_game/board.rb"
 require "risk_game/exceptions.rb"
+require "risk_game/game.rb"
 require "risk_game/version"
 
 module RiskGame

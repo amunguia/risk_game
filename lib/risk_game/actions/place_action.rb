@@ -4,11 +4,22 @@ module Risk
 
     class PlaceAction < Action 
 
-      attr_reader :by_user, :number_armies
+      attr_reader :by_user, :destination_country, :number_armies
 
-      def initialize(by_user, number_armies)
+      def initialize(by_user, destination_country, number_armies)
         @by_user = by_user
+        @destination_country = destination_country
         @number_armies = number_armies
+      end
+
+      def reset(game)
+        game.max_place = 0
+        game
+      end
+
+      def valid_on?(game) 
+        (number_armies <= game.max_place) &&
+        (game.owner_of(destination_country) == by_user)
       end
 
     end

@@ -12,6 +12,15 @@ module Risk
         end
       end
 
+      def self.are_adjacent?(country1, country2)
+        if !@adjacent_map.keys.include?(country1) || 
+            !@adjacent_map.keys.include?(country2)
+          raise CountryDoesNotExist
+        end
+
+        @adjacent_map[country1].include? country2
+      end 
+
       def self.countries
         @adjacent_map.keys
       end

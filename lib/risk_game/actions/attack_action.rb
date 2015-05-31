@@ -14,6 +14,17 @@ module Risk
         @attack_with = attack_with
       end
 
+      def valid_on?(game)
+        (attacker != defender) &&
+        (attack_with > 0) &&
+        (Board.countries.include? attacking_country) &&
+        (Board.countries.include? defending_country) &&
+        (Board.are_adjacent?(attacking_country, defending_country)) && 
+        (game.owner_of(attacking_country) == attacker) &&
+        (game.owner_of(defending_country) == defender) &&
+        (game.armies_in(attacking_country) >= (attack_with + 1))
+      end
+
     end
 
   end

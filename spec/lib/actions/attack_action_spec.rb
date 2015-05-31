@@ -3,7 +3,7 @@ module Risk::Game
   describe AttackAction do 
 
     before :each do 
-      @attack_action = AttackAction.new(1,2, :alaska, :kamchatka, 3)
+      @attack_action = AttackAction.new(1, 2, :alaska, :kamchatka, 3)
     end 
 
     describe ".attacker" do 
@@ -34,6 +34,67 @@ module Risk::Game
       it "returns the correct defending country" do 
         expect(@attack_action.defending_country).to be :kamchatka
       end
+    end
+
+    describe ".valid_on?" do 
+
+      before :each do 
+        @game = Game.new
+        allow(@game).to receive(:owner_of).with(:alaska).and_return(1)
+        allow(@game).to receive(:owner_of).with(:kamchatka).and_return(2)
+        allow(@game).to receive(:armies_in).with(:alaska).and_return(10)
+      end
+
+      context "when valid" do 
+        it "returns true" do 
+          expect(@attack_action.valid_on? @game).to be true
+        end
+      end
+
+      context "when invalid" do 
+
+        it "returns false if countries are not adjacent" do 
+          action = AttackAction.new(1, 2, :alaska, :argentina, 3)
+          expect(action.valid_on? @game).to be false
+        end
+
+        it "returns false if attacker does not own attacking country" do 
+          allow(@game).to receive(:owner_of).with(:alaska).and_return(3)
+          expect(@attack_action.valid_on? @game).to be false
+        end 
+
+        it "returns false if defender does not own defending country" do 
+          allow(@game).to receive(:owner_of).with(:kamchatka).and_return(3)
+          expect(@attack_action.valid_on? @game).to be false
+        end 
+
+        it "returns false if attacker is the same as the defender" do 
+          action = AttackAction.new(1, 1, :alaska, :kamchatka, 3)
+          expect(action.valid_on? @game).to be false
+        end
+
+        it "returns false if number of armies in attacking country less than number attacking with - 1" do 
+          allow(@game).to receive(:armies_in).with(:alaska).and_return(3)
+          expect(@attack_action.valid_on? @game).to be false
+        end
+   
+        it "returns false if attack_with < 1" do 
+          action = AttackAction.new(1, 2, :alaska, :kamchatka, 0)
+          expect(action.valid_on? @game).to be false
+        end
+
+        it "returns false if attacking_country does not exist" do 
+          action = AttackAction.new(1, 2, :fake_country, :kamchatka, 3)
+          expect(action.valid_on? @game).to be false
+        end
+
+        it "returns false if defending_country does not exist" do 
+          action = AttackAction.new(1, 2, :alaska, :fake_country, 3)
+          expect(action.valid_on? @game).to be false
+        end
+
+      end
+
     end
 
   end

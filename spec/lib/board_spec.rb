@@ -13,6 +13,24 @@ module Risk::Game
 
     end
 
+    describe ".are_adjacent?" do
+      it "throws an exception if the first country does not exist" do
+        expect{ Board.are_adjacent?(:fake_country, :kamchatka) }.to raise_error(CountryDoesNotExist)
+      end
+
+      it "throws an exception if the second coutry does not exist" do 
+        expect{ Board.are_adjacent?(:alaska, :fake_country) }.to raise_error(CountryDoesNotExist)
+      end
+
+      it "returns true if the countries are adjacent" do 
+        expect( Board.are_adjacent?(:alaska, :kamchatka)).to be true
+      end
+
+      it "returns false if the countries are not adjacent" do 
+        expect( Board.are_adjacent?(:alaska, :argentina)).to be false
+      end
+    end
+
     describe ".countries" do 
       it "returns an array of symbols" do 
         expect(Board.countries).to be_kind_of(Array)
