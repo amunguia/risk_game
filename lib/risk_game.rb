@@ -9,6 +9,12 @@ require "risk_game/board.rb"
 require "risk_game/cards.rb"
 require "risk_game/exceptions.rb"
 require "risk_game/game.rb"
+require "risk_game/states/state.rb"
+require "risk_game/states/attack_state.rb"
+require "risk_game/states/initial_place_state.rb"
+require "risk_game/states/post_attack_move_state.rb"
+require "risk_game/states/turn_start_after_cards_state.rb"
+require "risk_game/states/turn_start_state.rb"
 require "risk_game/version"
 
 module RiskGame
