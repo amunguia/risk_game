@@ -13,9 +13,9 @@ module Risk
         wins = [0,0]
         shorter_length.times do |i|
           if (attacker_dice[i] > defender_dice[i])
-            wins[0] += 1
-          else
             wins[1] += 1
+          else
+            wins[0] += 1
           end
         end
 

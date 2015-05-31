@@ -18,7 +18,7 @@ module Risk::Game
 
       it "returns the number of wins for the defender" do 
         a, defender_win = Attack.rank_dice([5,5,1], [6,5,1])
-        expect(defender_win).to be 3
+        expect(defender_win).to be 0
       end
     end
 
@@ -33,7 +33,19 @@ module Risk::Game
     end
 
     describe ".run_attack" do 
-      
+      before :each do
+        @action = AttackAction.new(1, 2, :alaska, :kamchatka, 3)
+        @game = Game.new
+        allow(@game).to receive(:armies_in).with(:kamchatka).and_return(1)
+      end
+
+      it "returns an array" do 
+        expect(Attack.run_attack(@action, @game)).to be_kind_of(Array)
+      end
+
+      it "returns an array of length 2" do 
+        expect(Attack.run_attack(@action, @game).length).to eq 2
+      end
     end
 
   end

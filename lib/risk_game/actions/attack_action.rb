@@ -14,6 +14,14 @@ module Risk
         @attack_with = attack_with
       end
 
+      def execute_on(game)
+        attacker_losses, defender_losses = Attack.run_attack(self, game)
+        game.place_armies_in(attacking_country, -attacker_losses)
+        game.place_armies_in(defending_country, -defender_losses)
+
+        attacker_losses < defender_losses
+      end
+
       def valid_on?(game)
         (attacker != defender) &&
         (attack_with > 0) &&

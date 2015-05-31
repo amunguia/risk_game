@@ -37,7 +37,32 @@ module Risk::Game
     end
 
     describe ".execute_on" do 
+      before :each do 
+        @game = Game.new
+        @game.place_armies_in(:alaska, 10)
+        @game.place_armies_in(:kamchatka, 2)
 
+        allow(Attack).to receive(:run_attack).and_return([1,1])
+      end
+
+      it "decreases the attacking countries armies by number of losses" do 
+        @attack_action.execute_on(@game)
+        expect(@game.armies_in :alaska).to be (9)
+      end
+
+      it "decreases the defending countries armeis by number of losses" do 
+        @attack_action.execute_on(@game)
+        expect(@game.armies_in :kamchatka).to be (1)
+      end
+
+      it "returns true if the attacker wins" do
+        allow(Attack).to receive(:run_attack).and_return([2,1])
+        expect(@attack_action.execute_on @game).to be false
+      end
+
+      it "returns false if the attacker loses" do 
+        expect(@attack_action.execute_on @game).to be false
+      end
     end
 
     describe ".valid_on?" do 
