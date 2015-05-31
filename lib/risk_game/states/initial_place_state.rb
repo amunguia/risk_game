@@ -15,13 +15,21 @@ module Risk
         else
           game.next_player
           game.players_to_setup -= 1
-          game.max_place = Game::INITIAL_ARMIES
+          game.max_place = next_max_place(game)
           
           if game.players_to_setup > 0
             InitialPlaceState.new
           else
             TurnStartState.new
           end
+        end
+      end
+
+      def next_max_place(game) 
+        if game.players_to_setup > 0
+          Game::INITIAL_ARMIES
+        else
+          game.armies_for game.current_player
         end
       end
 

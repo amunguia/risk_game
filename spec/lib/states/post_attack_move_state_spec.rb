@@ -16,6 +16,10 @@ module Risk::Game
         expect(@state.allows? action).to be false
       end
 
+      it "returns false if move action does not have source == move_from" do 
+
+      end
+
     end
 
     describe ".update" do

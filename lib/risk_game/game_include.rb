@@ -11,6 +11,7 @@ module Risk
       #     'cards'           - Array(Number)
       #     'max_place'       - Number
       #     'minimum_move'    - Number
+      #     'move_from'       - Symbol
       #     'players'         - Array(Number)
       #     'players_to_setup'- Number
       #     'state'           - State
@@ -33,8 +34,8 @@ module Risk
       def play_action(action, game)
         if self.state.allows?(action) &&
           action.valid_on?(game)
-          action.execute_on self.game
-          self.state = state.update(action, self.game)
+          action.execute_on game
+          self.state = state.update(action, game)
           self.state
         else
           false
@@ -53,11 +54,13 @@ module Risk
         countries = Board.countries.shuffle
         ps = players
 
-        self.assignment_map = {}
+        assignment_map = {}
         countries.each do |country|
-          self.assignment_map[country] = ps[0]
+          assignment_map[country] = ps[0]
           ps = ps.drop(1) << ps[0]
         end
+
+        self.assignment_map = assignment_map
       end
 
       def cards_for_player(player_id)
@@ -85,15 +88,28 @@ module Risk
       end
 
       def owner_of(country)
-        self.assignment_map[country]
+        assignment_map = self.assignment_map
+        player = assignment_map[country]
+        self.assignment_map = assignment_map
+        player
       end
 
       def place_armies_in(country, count)
-        self.army_map[country] += count
+        army_map = self.army_map
+        army_map[country] += count
+        self.army_map = army_map
+      end
+
+      def remove_player(player)
+        players = self.players
+        players.delete player 
+        self.players = players
       end
 
       def set_cards_for_player(player_id, cards)
-        self.cards[player_id] = cards
+        saved_cards = self.cards
+        saved_cards[player_id] = cards
+        self.cards = saved_cards
       end
 
       def set_players(players)
@@ -101,18 +117,20 @@ module Risk
       end
 
       def set_owner_of(country, player)
-        self.assignment_map[country] = player
+        assignment_map = self.assignment_map
+        assignment_map[country] = player
+        self.assignment_map = assignment_map
       end
 
       private 
 
       def initial_army_map
         countries = Board.countries
-        self.army_map = {}
+        army_map = {}
         countries.each do |country|
           army_map[country] = 1
         end
-
+        self.army_map = army_map
       end
  
     end 

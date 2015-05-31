@@ -7,8 +7,8 @@ module Risk
       include Risk::Game::GameInterface      
 
       attr_accessor :army_map, :assignment_map, :card_list, :cards, 
-              :max_place, :minimum_move, :players, :players_to_setup, 
-              :state, :won
+              :max_place, :minimum_move, :move_from, :move_to, :players, 
+              :players_to_setup, :state, :won
 
       def initialize
         self.init

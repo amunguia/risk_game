@@ -100,6 +100,18 @@ module Risk::Game
         expect(@game.players).to_not include(2)
       end
 
+      it "sets move_from to attacking country on win" do 
+        allow(Attack).to receive(:run_attack).and_return([1,2])
+        @attack_action.execute_on @game
+        expect(@game.move_from).to be :alaska
+      end
+
+      it "sets move_to to defending country on win" do 
+        allow(Attack).to receive(:run_attack).and_return([1,2])
+        @attack_action.execute_on @game
+        expect(@game.move_to).to be :kamchatka
+      end
+
     end
 
     describe ".valid_on?" do 
