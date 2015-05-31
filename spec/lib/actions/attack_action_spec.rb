@@ -36,6 +36,12 @@ module Risk::Game
       end
     end
 
+    describe ".won" do 
+      it "returns win status" do 
+        expect(@attack_action.won).to be false
+      end
+    end
+
     describe ".execute_on" do 
       before :each do 
         @game = Game.new
@@ -55,13 +61,16 @@ module Risk::Game
         expect(@game.armies_in :kamchatka).to be (1)
       end
 
-      it "returns true if the attacker wins" do
-        allow(Attack).to receive(:run_attack).and_return([2,1])
-        expect(@attack_action.execute_on @game).to be false
+      it "sets attack.won to true if the attacker wins" do
+        allow(Attack).to receive(:run_attack).and_return([1,2])
+        @attack_action.execute_on @game
+        expect(@game.won).to be true
       end
 
-      it "returns false if the attacker loses" do 
-        expect(@attack_action.execute_on @game).to be false
+      it "it sets game.won to true if attacker wins" do 
+        allow(Attack).to receive(:run_attack).and_return([1,2])
+        @attack_action.execute_on @game
+        expect(@attack_action.won).to be true
       end
     end
 

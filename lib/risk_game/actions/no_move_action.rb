@@ -9,7 +9,7 @@ module Risk
       end
 
       def valid_on?(game)
-        true
+        
       end
 
     end

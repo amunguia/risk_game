@@ -18,5 +18,4 @@ require "risk_game/states/turn_start_state.rb"
 require "risk_game/version"
 
 module RiskGame
-  # Your code goes here...
 end

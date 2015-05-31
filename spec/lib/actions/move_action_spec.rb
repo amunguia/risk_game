@@ -34,10 +34,6 @@ module Risk::Game
         @move_action.execute_on(@game)
         expect(@game.armies_in :alaska).to eq (starting_count - 3)
       end
-
-      it "returns true" do 
-        expect(@move_action.execute_on @game).to be true
-      end
     end
 
     describe ".reset" do 

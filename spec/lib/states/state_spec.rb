@@ -11,8 +11,10 @@ module Risk::Game
       end
     end
 
-    describe ".run_action" do 
-      
+    describe ".update" do
+      it "returns error because this method is abstract." do 
+        expect{ @state.update NoMoveAction.new, Game.new}.to raise_error "Abstract method."
+      end
     end
 
   end  

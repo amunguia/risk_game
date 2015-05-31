@@ -6,12 +6,14 @@ module Risk
 
       attr_reader :attacker, :defender, :attacking_country, :defending_country,
                   :attack_with
+      attr_accessor :won
 
       def initialize(attacker_id, defender_id, attack_country, defending_country, 
                       attack_with)
         @attacker, @defender = attacker_id, defender_id
         @attacking_country, @defending_country = attack_country, defending_country
         @attack_with = attack_with
+        @won = false
       end
 
       def execute_on(game)
@@ -19,7 +21,8 @@ module Risk
         game.place_armies_in(attacking_country, -attacker_losses)
         game.place_armies_in(defending_country, -defender_losses)
 
-        attacker_losses < defender_losses
+        self.won = attacker_losses < defender_losses
+        game.won = self.won
       end
 
       def valid_on?(game)

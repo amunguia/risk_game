@@ -17,8 +17,18 @@ module Risk
         end
       end
 
-      def update_state
+      def play(action, game)
+        if self.allows?(action) &&
+            action.valid_on?(game)
+          action.execute_on game
+          game.update_state self.update(action)
+        else
+          false
+        end
+      end 
 
+      def update(action, game)
+        raise "Abstract method."
       end
 
     end

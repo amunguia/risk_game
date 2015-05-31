@@ -6,8 +6,12 @@ module Risk
 
       def allows?(action)
         type = action.class 
-
         type.eql? MoveAction
+      end
+
+      def update(action, game)
+        game.minimum_move = 0
+        AttackState.new
       end
 
     end

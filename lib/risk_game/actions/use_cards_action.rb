@@ -14,7 +14,6 @@ module Risk
       def execute_on(game)
         game.max_place += value_for_cards
         update_cards(game)
-        true
       end
 
       def valid_on?(game)
