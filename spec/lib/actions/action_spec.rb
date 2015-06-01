@@ -12,13 +12,6 @@ module Risk::Game
       end
     end
 
-    describe ".reset" do 
-      it "returns the game" do 
-        game = Game.new
-        expect(@action.reset(game)).to eq game
-      end
-    end
-
     describe ".valid_on?" do 
       it "raises an error because its an abstract method" do 
         expect{ @action.valid_on?(Game.new) }.to raise_error("Abstract method.")

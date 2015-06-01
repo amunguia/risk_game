@@ -8,11 +8,7 @@ module Risk::Game
           expect(action.execute_on(Game.new)).to be true
         end
       end
-
-      describe ".valid_on?" do 
-        
-      end
-
+      
     end
 
 end

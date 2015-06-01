@@ -8,10 +8,6 @@ module Risk
         raise "Abstract method."
       end
 
-      def reset(game)
-        game
-      end
-
       def valid_on?(game)
         raise "Abstract method."
       end

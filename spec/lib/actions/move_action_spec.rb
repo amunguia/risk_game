@@ -36,20 +36,6 @@ module Risk::Game
       end
     end
 
-    describe ".reset" do 
-      it "sets the minimum_move on the game to 0" do   
-        game = Game.new
-        game.minimum_move = 2
-        @move_action.reset game
-        expect(game.minimum_move).to be 0
-      end
-
-      it "returns the game" do 
-        game = Game.new
-        expect(@move_action.reset game).to eq game
-      end
-    end
-
     describe ".source_country" do 
       it "returns the correct destination country" do 
         expect(@move_action.source_country).to eq :alaska

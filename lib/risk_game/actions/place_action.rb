@@ -17,11 +17,6 @@ module Risk
         game.max_place -= number_armies
       end
 
-      def reset(game)
-        game.max_place = 0
-        game
-      end
-
       def valid_on?(game) 
         (number_armies <= game.max_place) &&
         (game.owner_of(destination_country) == by_user)

@@ -40,21 +40,6 @@ module Risk::Game
       end
     end
 
-    describe ".reset" do
-      
-      it "sets max_place on the game to 0" do 
-        game = Game.new
-        game.max_place = 5
-        @place_action.reset game
-        expect(game.max_place).to be 0
-      end
-
-      it "returns the game" do 
-        game = Game.new
-        expect(@place_action.reset game).to be game
-      end
-    end
-
     describe ".valid_on?" do 
       before :each do 
         @game = Game.new

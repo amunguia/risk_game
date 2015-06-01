@@ -31,17 +31,6 @@ module Risk
         initial_army_map
       end
 
-      def play_action(action, game)
-        if self.state.allows?(action) &&
-              action.valid_on?(game)
-          action.execute_on game
-          self.state = state.update(action, game)
-          self.state
-        else
-          false
-        end
-      end
-
       def armies_in(country)
         self.army_map[country]
       end

@@ -17,11 +17,6 @@ module Risk
           game.place_armies_in(source_country, -1 * number_armies)
         end
 
-        def reset(game)
-          game.minimum_move = 0
-          game
-        end
-
         def valid_on?(game)
           (Board.are_adjacent?(source_country, destination_country)) &&
           (game.armies_in(source_country) >= (number_armies + 1)) &&
