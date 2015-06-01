@@ -29,7 +29,7 @@ module Risk
           game.move_from = attacking_country
           game.move_to = defending_country
           if !game.assignment_map.values.include?(defender)
-            game.players.delete(defender)
+            game.remove_player(defender)
           end
         end
       end

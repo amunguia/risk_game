@@ -21,6 +21,12 @@
         @adjacent_map[country1].include? country2
       end 
 
+      def self.continents
+        [Board.north_america, Board.south_america, Board.europe, Board.africa,
+         Board.asia, Board.australia].zip(["North America", "South America",
+          "Europe", "Africa", "Asia", "Australia"])
+      end
+
       def self.countries
         @adjacent_map.keys
       end
