@@ -107,6 +107,14 @@ module Risk
         army_map = self.army_map
         army_map[country] += count
         self.army_map = army_map
+      end 
+
+      def rolls
+        @rolls || [[],[]]
+      end
+
+      def rolls=(array)
+        @rolls = array
       end
 
       def remove_player(player)

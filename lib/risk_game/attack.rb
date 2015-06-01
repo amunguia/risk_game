@@ -32,7 +32,10 @@ module Risk
 
       def self.run_attack(action, game) 
         defend_with = game.armies_in(action.defending_country) > 1? 2 : 1
-        rank_dice(roll_dice(action.attack_with) ,roll_dice(defend_with))
+        rolls = [roll_dice(action.attack_with)]
+        rolls << roll_dice(defend_with)
+        game.rolls = rolls
+        rank_dice(rolls[0], rolls[1])
       end
 
     end
