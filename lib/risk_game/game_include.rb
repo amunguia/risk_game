@@ -67,6 +67,15 @@ module Risk
         self.cards[player_id]
       end
 
+      def cards_with_values_for_player(player_id)
+        cards = self.cards[player_id]
+        card_hash = {}
+        cards.each do |card|
+          card_hash[card] = Cards.card_value card
+        end
+        card_hash
+      end
+
       def current_player
         self.players[0]
       end

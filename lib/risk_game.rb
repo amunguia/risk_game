@@ -1,6 +1,7 @@
 require "risk_game/actions/action.rb"
 require "risk_game/actions/attack_action.rb"
 require "risk_game/actions/move_action.rb"
+require "risk_game/actions/move_after_win_action.rb"
 require "risk_game/actions/no_move_action.rb"
 require "risk_game/actions/place_action.rb"
 require "risk_game/actions/use_cards_action.rb"
