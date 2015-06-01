@@ -19,14 +19,29 @@ module Risk
         game
       end
 
-      def play_action(action, game)
-        if self.state.allows?(action) &&
-              action.valid_on?(game)
+      def play_action(user,action, game)
+        error_message = allow_action(user, action, game)
+        
+        if !error_message
           action.execute_on game
           self.state = state.update(action, game)
           self.state
         else
-          false
+          error_message
+        end
+      end
+
+      private 
+
+      def allow_action(user, action, game)
+        if !game.current_player.eql? 
+          "Not your turn"
+        elsif game.state.allows? action
+          "Cannot play this action at this time."
+        elsif action.valid_on? game
+          action.error_message  
+        else
+          true
         end
       end
 

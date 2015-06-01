@@ -4,7 +4,6 @@ module Risk
 
     class Game 
       extend  GameCreation
-
       include GameInterface      
 
       attr_accessor :army_map, :assignment_map, :card_list, :cards, 
