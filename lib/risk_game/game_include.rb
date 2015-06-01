@@ -4,10 +4,10 @@ module Risk
 
     module GameInterface
 
-      # Dependency: attr_accessor 'army_map', 'assignment_map', 'players'
+      # When including, ensure the following attr_accessors are provided
       #     'army_map'        - Hash(Symbol => Number)
       #     'assignment_map'  - Hash(Symbol => Number)
-      #     'card_list'       - String -- (List of number, comma seperated)
+      #     'card_list'       - String 
       #     'cards'           - Array(Number)
       #     'max_place'       - Number
       #     'minimum_move'    - Number
@@ -33,7 +33,7 @@ module Risk
 
       def play_action(action, game)
         if self.state.allows?(action) &&
-          action.valid_on?(game)
+              action.valid_on?(game)
           action.execute_on game
           self.state = state.update(action, game)
           self.state
@@ -47,7 +47,7 @@ module Risk
       end
 
       def armies_for(player_id)
-        Board.points_for self.assignment_map.select {|key, value| value == player_id}.keys
+        Board.points_for(self.assignment_map.select {|key, value| value == player_id}.keys)
       end
 
       def build_assignment_map
