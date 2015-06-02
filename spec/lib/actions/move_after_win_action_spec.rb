@@ -16,13 +16,25 @@ module Risk::Game
         @game.move_from = :alberta
         expect(@move_action.valid_on? @game).to be false
       end
-    end
 
-    describe ".valid_on?" do 
-      it "returns false if source_country is not the same as move_from" do 
+      it "returns false if source_country is not the same as move_to" do 
         @game.move_to = :alberta
         expect(@move_action.valid_on? @game).to be false
       end
+
+      it "it sets error_message when source sountry is not the same as the move_from" do 
+        @game.move_from = :alberta
+        @move_action.valid_on? @game
+        expect(@move_action.error_message).to eq "Must move from alberta."
+      end
+
+      it "it sets error_message when destination sountry is not the same as the move_to" do 
+        @game.move_to = :alberta
+        @game.move_from = :alaska
+        @move_action.valid_on? @game
+        expect(@move_action.error_message).to eq "Must move to alberta."
+      end
+
     end
 
   end

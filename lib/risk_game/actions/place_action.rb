@@ -20,13 +20,11 @@ module Risk
       def valid_on?(game) 
         if !(number_armies <= game.max_place) 
           @error_message = "Sorry, you are placing too many armies."
-          false
         elsif !(game.owner_of(destination_country) == by_user)
           @error_message = "Sorry, you cannot place armies into another players country."
-          false
-        else 
-          true
         end
+
+        @error_message == nil
       end
 
     end

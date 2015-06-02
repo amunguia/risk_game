@@ -65,9 +65,21 @@ module Risk::Game
           expect(action.valid_on? @game).to be false
         end
 
+        it "sets error message if countries are not adjacent" do 
+          action = MoveAction.new(:alaska, :argentina, 3)
+          action.valid_on? @game
+          expect(action.error_message).to eq "Countries are not adjacent."
+        end
+
         it "returns false if number_armes is greater than number in source country - 1" do 
           action = MoveAction.new(:alaska, :kamchatka, 10)
           expect(action.valid_on? @game).to be false
+        end
+
+        it "sets error message whe number_armies is greater than nubmer in source country - 1" do 
+          action = MoveAction.new(:alaska, :kamchatka, 10)
+          action.valid_on? @game
+          expect(action.error_message).to eq "Number of armies is greater than 9"
         end
 
         it "returns false if number_armies is less than mininimum" do
@@ -75,9 +87,21 @@ module Risk::Game
           expect(action.valid_on? @game).to be false
         end
 
+        it "sets error_message if number_armies is less than minimum" do 
+          action = MoveAction.new(:alaska, :kamchatka, 1)
+          action.valid_on? @game
+          expect(action.error_message).to eq "Number of armies is less than 3."
+        end
+
         it "returns false if the owner is the not same for both countries" do 
           allow(@game).to receive(:owner_of).with(:kamchatka).and_return(2)
           expect(@move_action.valid_on? @game).to be false
+        end
+
+        it "sets error_message if the owner is not the same for both countries" do 
+          allow(@game).to receive(:owner_of).with(:kamchatka).and_return(2)
+          @move_action.valid_on? @game
+          expect(@move_action.error_message).to eq "You do not own both countries."
         end
 
       end

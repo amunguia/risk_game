@@ -4,7 +4,7 @@ module Risk
 
     class MoveAction < Action 
 
-        attr_reader :destination_country, :source_country, :number_armies
+        attr_reader :destination_country, :source_country, :number_armies, :error_message
 
         def initialize(source_country, destination_country, number_armies)
           @destination_country = destination_country
@@ -18,10 +18,17 @@ module Risk
         end
 
         def valid_on?(game)
-          (Board.are_adjacent?(source_country, destination_country)) &&
-          (game.armies_in(source_country) >= (number_armies + 1)) &&
-          (game.minimum_move <= number_armies) &&
-          (game.owner_of(source_country) == game.owner_of(destination_country))
+          if !Board.are_adjacent?(source_country, destination_country)
+            @error_message = "Countries are not adjacent."
+          elsif !(game.armies_in(source_country) >= (number_armies + 1))
+            @error_message = "Number of armies is greater than #{game.armies_in(source_country) - 1}"
+          elsif !(game.minimum_move <= number_armies)
+            @error_message = "Number of armies is less than #{game.minimum_move}."
+          elsif !(game.owner_of(source_country) == game.owner_of(destination_country))
+            @error_message = "You do not own both countries."
+          end
+
+          @error_message == nil
         end
 
     end
