@@ -4,7 +4,7 @@ module Risk
 
     class UseCardsAction < Action 
 
-      attr_reader :by_user, :cards_to_use
+      attr_reader :by_user, :cards_to_use, :error_message
 
       def initialize(by_user, cards_to_use)
         @by_user = by_user
@@ -17,7 +17,12 @@ module Risk
       end
 
       def valid_on?(game)
-        player_has_cards(game)
+        if !player_has_cards(game)
+          @error_message = "Attempting to play another player's cards."
+          false
+        else
+          true
+        end
       end
 
       private 

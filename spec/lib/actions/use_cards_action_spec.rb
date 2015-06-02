@@ -56,6 +56,12 @@ module Risk::Game
           expect(@use_cards_action.valid_on? @game).to be false
         end
 
+        it "sets the error message when users does not own all cards" do
+          allow(@game).to receive(:cards_for_player).with(1).and_return(["Alaska", "Argentina"])
+          @use_cards_action.valid_on? @game
+          expect(@use_cards_action.error_message).to eq "Attempting to play another player's cards."          
+        end
+
       end
 
     end

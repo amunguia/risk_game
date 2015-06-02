@@ -4,7 +4,7 @@ module Risk
 
     class PlaceAction < Action 
 
-      attr_reader :by_user, :destination_country, :number_armies
+      attr_reader :by_user, :destination_country, :number_armies, :error_message
 
       def initialize(by_user, destination_country, number_armies)
         @by_user = by_user
@@ -18,8 +18,15 @@ module Risk
       end
 
       def valid_on?(game) 
-        (number_armies <= game.max_place) &&
-        (game.owner_of(destination_country) == by_user)
+        if !(number_armies <= game.max_place) 
+          @error_message = "Sorry, you are placing too many armies."
+          false
+        elsif !(game.owner_of(destination_country) == by_user)
+          @error_message = "Sorry, you cannot place armies into another players country."
+          false
+        else 
+          true
+        end
       end
 
     end

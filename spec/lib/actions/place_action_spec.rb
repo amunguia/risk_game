@@ -60,9 +60,21 @@ module Risk::Game
           expect(@place_action.valid_on? @game).to be false
         end
 
+        it "sets the error message when the user does not own the country" do 
+          allow(@game).to receive(:owner_of).with(:alaska).and_return(2)
+          @place_action.valid_on? @game
+          expect(@place_action.error_message).to eq "Sorry, you cannot place armies into another players country."
+        end
+
         it "returns false if the number_armies is greater than max place" do 
           allow(@game).to receive(:max_place).and_return(2)
           expect(@place_action.valid_on? @game).to be false
+        end
+
+        it "sets the error message when the user places too many armies in the country" do 
+          allow(@game).to receive(:max_place).and_return(2)
+          @place_action.valid_on? @game
+          expect(@place_action.error_message).to eq "Sorry, you are placing too many armies."
         end
 
       end
