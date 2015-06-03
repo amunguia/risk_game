@@ -4,20 +4,6 @@ module Risk
 
     module UtilityMethods
 
-      # When including, ensure the following attr_accessors are provided
-      #     'army_map'        - Hash(Symbol => Number)
-      #     'assignment_map'  - Hash(Symbol => Number)
-      #     'card_list'       - String 
-      #     'cards'           - Array(Number)
-      #     'max_place'       - Number
-      #     'minimum_move'    - Number
-      #     'move_from'       - Symbol
-      #     'players'         - Array(Number)
-      #     'players_to_setup'- Number
-      #     'state'           - State
-      #     'won'             - Boolean
-
-
       INITIAL_ARMIES = 20
 
       def init
