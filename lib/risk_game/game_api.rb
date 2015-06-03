@@ -41,12 +41,31 @@ module Risk
                    attacking_country, defending_country, attack_with))
       end
 
+      def armies_in(country)
+        self.army_map[country]
+      end
+
+      def current_player
+        self.players[0]
+      end
+
+      def game_over?
+        self.state.class.eql? GameOverState
+      end
+
       def move(mover, move_from, move_to)
         self.play_action(mover, MoveAction.new(mover, move_from, move_to))
       end
 
       def no_move(no_mover)
         self.play_action(no_mover, NoMoveAction.new)
+      end
+
+      def owner_of(country)
+        assignment_map = self.assignment_map
+        player = assignment_map[country]
+        self.assignment_map = assignment_map
+        player
       end
 
       def place(placer, into_country, number_armies)

@@ -19,10 +19,6 @@
         initial_army_map
       end
 
-      def armies_in(country)
-        self.army_map[country]
-      end
-
       def armies_for(player_id)
         Board.points_for(self.assignment_map.select {|key, value| value == player_id}.keys)
       end
@@ -53,14 +49,6 @@
         card_hash
       end
 
-      def current_player
-        self.players[0]
-      end
-
-      def game_over?
-        self.state.class.eql? GameOverState
-      end
-
       def give_player_card
         cards = cards_for_player(current_player) << next_card
         set_cards_for_player(current_player, cards)
@@ -75,13 +63,6 @@
       def next_player
         self.players = self.players.drop(1) << self.players.first
         current_player
-      end
-
-      def owner_of(country)
-        assignment_map = self.assignment_map
-        player = assignment_map[country]
-        self.assignment_map = assignment_map
-        player
       end
 
       def place_armies_in(country, count)
