@@ -12,7 +12,7 @@ module Risk
       end
 
       def execute_on(game)
-        game.max_place += value_for_cards
+        game.max_place += value_for_stars
         update_cards(game)
       end
 
@@ -48,12 +48,37 @@ module Risk
       end
 
       def value_for_cards
-        @value  ||= begin
-          value = 0
+        @stars  ||= begin
+          stars = 0
           cards_to_use.each do |c|
-            value += Cards.card_value c 
+            stars += Cards.card_value c 
           end
-          value
+          stars
+        end
+      end
+
+      def value_for_stars
+        case value_for_cards
+        when 2
+          2
+        when 3
+          4
+        when 4
+          7
+        when 5
+          10
+        when 6
+          13
+        when 7
+          17
+        when 8
+          21
+        when 9
+          25
+        when 10
+          30
+        else
+          raise "Invalid number of stars"
         end
       end
  

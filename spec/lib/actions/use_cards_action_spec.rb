@@ -25,9 +25,10 @@ module Risk::Game
       end
 
       it "increases the max_place by the value from the cards" do 
+        @use_cards_action = UseCardsAction.new(1,["Alaska","Alberta", "Congo", "Siam", "Yakutsk"])
         max_place = @game.max_place
         @use_cards_action.execute_on(@game)
-        expect(@game.max_place).to be (max_place + 2)
+        expect(@game.max_place).to be (max_place + 17)
       end
 
       it "removes the cards from the cards_for_player list" do 
