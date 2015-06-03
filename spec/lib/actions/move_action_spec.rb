@@ -7,18 +7,22 @@ module Risk::Game
     end
 
     describe ".destination_country" do 
+
       it "returns the correct destination country" do 
         expect(@move_action.destination_country).to eq :kamchatka
       end
+
     end
 
     describe ".number_armies" do 
+
       it "returns the correct destination country" do 
         expect(@move_action.number_armies).to eq 3
       end
     end
 
     describe ".execute_on" do 
+
       before :each do 
         @game = Game.create_with_players [1,2,3,4]
       end
@@ -37,9 +41,11 @@ module Risk::Game
     end
 
     describe ".source_country" do 
+
       it "returns the correct destination country" do 
         expect(@move_action.source_country).to eq :alaska
       end
+
     end
 
     describe ".valid_on?" do 
@@ -65,7 +71,7 @@ module Risk::Game
           expect(action.valid_on? @game).to be false
         end
 
-        it "sets error message if countries are not adjacent" do 
+        it "sets error_message if countries are not adjacent" do 
           action = MoveAction.new(:alaska, :argentina, 3)
           action.valid_on? @game
           expect(action.error_message).to eq "Countries are not adjacent."
@@ -76,7 +82,7 @@ module Risk::Game
           expect(action.valid_on? @game).to be false
         end
 
-        it "sets error message whe number_armies is greater than nubmer in source country - 1" do 
+        it "sets error_message whe number_armies is greater than nubmer in source country - 1" do 
           action = MoveAction.new(:alaska, :kamchatka, 10)
           action.valid_on? @game
           expect(action.error_message).to eq "Number of armies is greater than 9"

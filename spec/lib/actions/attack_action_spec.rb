@@ -7,42 +7,55 @@ module Risk::Game
     end 
 
     describe ".attacker" do 
+
       it "returns the correct attacker id" do 
         expect(@attack_action.attacker).to be 1
       end
+
     end
 
-    describe ".attacking_country" do 
+    describe ".attacking_country" do
+
       it "returns the correct attacking country" do 
         expect(@attack_action.attacking_country).to be :alaska
       end
+
     end
 
     describe ".attack_with" do 
+
       it "returns the correct attack with attribute" do 
         expect(@attack_action.attack_with).to be 3
       end
+
     end
 
     describe ".defender" do     
+
       it "returns the correct defender id" do 
         expect(@attack_action.defender).to be 2
       end
+
     end
 
     describe ".defending_country" do 
+
       it "returns the correct defending country" do 
         expect(@attack_action.defending_country).to be :kamchatka
       end
+
     end
 
     describe ".won" do 
+
       it "returns win status" do 
         expect(@attack_action.won).to be false
       end
+
     end
 
     describe ".execute_on" do 
+
       before :each do 
         @game = Game.create_with_players [1,2,3]
         @game.place_armies_in(:alaska, 9)  
@@ -136,7 +149,7 @@ module Risk::Game
           expect(action.valid_on? @game).to be false
         end
 
-        it "sets an error_message  if countries are not adjacent" do 
+        it "sets error_message  if countries are not adjacent" do 
           action = AttackAction.new(1, 2, :alaska, :argentina, 3)
           action.valid_on? @game
           expect(action.error_message).to eq "Countries are not adjacent."
@@ -147,7 +160,7 @@ module Risk::Game
           expect(@attack_action.valid_on? @game).to be false
         end 
 
-        it "sets an error_message  if attacker does not own attacking_country" do 
+        it "sets error_message  if attacker does not own attacking_country" do 
           allow(@game).to receive(:owner_of).with(:alaska).and_return(3)
           @attack_action.valid_on? @game
           expect(@attack_action.error_message).to eq "You do not own alaska."
@@ -158,7 +171,7 @@ module Risk::Game
           expect(@attack_action.valid_on? @game).to be false
         end 
 
-        it "sets an error_message  if defender does not own defending_country" do 
+        it "sets error_message  if defender does not own defending_country" do 
           allow(@game).to receive(:owner_of).with(:kamchatka).and_return(3)
           @attack_action.valid_on? @game
           expect(@attack_action.error_message).to eq "Defender does not own kamchatka."

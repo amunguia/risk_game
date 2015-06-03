@@ -6,6 +6,7 @@ module Risk::Game
     end
 
     describe ".allows?" do 
+
       it "returns true for AttackAction" do 
         action = AttackAction.new(1,2, :alaska, :kamchatka, 3)
         expect(@attack_state.allows? action).to be true
@@ -25,6 +26,7 @@ module Risk::Game
         action = PlaceAction.new(1, :kamchatka, 4)
         expect(@attack_state.allows? action).to be false
       end
+
     end
 
     describe ".update" do
@@ -57,11 +59,11 @@ module Risk::Game
       end
 
       context "turn ended" do 
+
         before :each do 
           @action = MoveAction.new(1,:kamchatka, 3)
           @game = Game.create_with_players [1,2,3,4]
         end
-
 
         it "if player has won increases the number of cards by current user by 1" do 
           current_player = @game.current_player
@@ -92,6 +94,7 @@ module Risk::Game
 
 
         context "MovedAction played" do 
+
           before :each do 
             @action = MoveAction.new(1,:kamchatka, 3)
           end
@@ -102,10 +105,12 @@ module Risk::Game
         end
 
         context "NoMoveAction played" do
+
           it "returns type TurnStartState" do
             @action = NoMoveAction.new
             expect(@attack_state.update(@action, @game)).to be_kind_of(TurnStartState)
           end
+          
         end
 
       end

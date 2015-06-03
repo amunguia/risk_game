@@ -1,6 +1,7 @@
 module Risk::Game
 
   describe TurnStartAfterCardsState do 
+
     before :each do 
       @state = TurnStartAfterCardsState.new
     end
@@ -16,6 +17,7 @@ module Risk::Game
         action = NoMoveAction.new
         expect(@state.allows? action).to be false
       end
+      
     end
 
   end

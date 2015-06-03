@@ -7,18 +7,23 @@ module Risk::Game
     end
 
     describe ".by_user" do 
+
       it "returns the user using cards" do 
         expect(@use_cards_action.by_user).to eq 1
       end
+
     end
 
     describe ".cards_to_use" do 
+
       it "returns an array of card ids to be used" do
         expect(@use_cards_action.cards_to_use).to eq ["Alaska","Alberta"]
       end
+
     end
 
     describe ".execute_on" do
+
       before :each do 
         @game = Game.create_with_players [1,2]
         allow(@game).to receive(:cards_for_player).with(1).and_return(["Alaska","Alberta", "Congo", "Siam", "Yakutsk"])
@@ -35,19 +40,23 @@ module Risk::Game
         @use_cards_action.execute_on(@game)
         expect(@game.cards_for_player(1)).to eq ["Congo", "Siam", "Yakutsk"]
       end
+
     end
 
 
     describe ".valid_on?" do 
+
       before :each do 
         @game = Game.create_with_players [1,2]
         allow(@game).to receive(:cards_for_player).with(1).and_return(["Alaska","Argentina", "Alberta"])
       end
 
-      context "is valid" do 
+      context "is valid" do
+
         it "returns true" do 
           expect(@use_cards_action.valid_on? @game).to be true
         end
+      
       end
 
       context "is invalid" do 
@@ -57,7 +66,7 @@ module Risk::Game
           expect(@use_cards_action.valid_on? @game).to be false
         end
 
-        it "sets the error message when users does not own all cards" do
+        it "sets error_message when users does not own all cards" do
           allow(@game).to receive(:cards_for_player).with(1).and_return(["Alaska", "Argentina"])
           @use_cards_action.valid_on? @game
           expect(@use_cards_action.error_message).to eq "Attempting to play another player's cards."          

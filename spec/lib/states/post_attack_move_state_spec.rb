@@ -1,11 +1,13 @@
 module Risk::Game
 
   describe PostAttackMoveState  do
+
     before :each do 
       @state = PostAttackMoveState.new
     end
       
     describe ".allows?" do
+
       it "returns true for MoveAction" do 
         action = MoveAction.new(:alaska, :kamchatka, 4)
         expect(@state.allows? action).to be true
@@ -19,10 +21,10 @@ module Risk::Game
     end
 
     describe ".update" do
+
       before :each do 
         @game = Game.new
         @game.minimum_move = 3
-
         @action = MoveAction.new(1, :kamchatka, 3)
       end
 
@@ -34,6 +36,7 @@ module Risk::Game
         @state.update(@action, @game)
         expect(@game.minimum_move).to be 0
       end
+      
     end
 
   end

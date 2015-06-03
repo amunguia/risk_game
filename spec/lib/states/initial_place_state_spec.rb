@@ -1,11 +1,13 @@
 module Risk::Game
 
   describe InitialPlaceState do 
+
     before :each do 
       @state = InitialPlaceState.new
     end
 
     describe ".allows?" do 
+
       it "returns true to PlaceAction" do
         action = PlaceAction.new(1, :kamchatka, 4)
         expect(@state.allows? action).to be true
@@ -15,15 +17,18 @@ module Risk::Game
         action = NoMoveAction.new
         expect(@state.allows? action).to be false
       end
+
     end
 
     describe ".update" do
+
       before :each do 
         @game = Game.create_with_players [1,2,3,4]
         @game.max_place =  10
       end
 
       context "player still has more armies to place" do
+
         before :each do 
           @action = PlaceAction.new(1,:kamchatka, 5)
         end
@@ -37,9 +42,11 @@ module Risk::Game
           @state.update(@action, @game)
           expect(@game.current_player).to be current_player
         end
+
       end
 
       context "player has played all armies" do
+
         before :each do 
           @action = PlaceAction.new(1,:kamchatka, 10)
           @game.max_place = 0
@@ -53,6 +60,7 @@ module Risk::Game
 
 
         context "another player remains to place" do  
+
           it "returns InitialPlaceState" do 
             expect(@state.update(@action, @game)).to be_kind_of(InitialPlaceState)
           end
@@ -67,9 +75,11 @@ module Risk::Game
             @state.update(@action, @game)
             expect(@game.max_place).to be Game::INITIAL_ARMIES
           end
+
         end
         
         context "no more players remain to place" do 
+          
           it "returns TurnStartState" do 
             @game.players_to_setup = 1
             expect(@state.update(@action, @game)).to be_kind_of(TurnStartState)
