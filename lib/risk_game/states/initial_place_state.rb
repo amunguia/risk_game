@@ -6,7 +6,12 @@ module Risk
    
       def allows?(action)
         type = action.class
-        type.eql? PlaceAction
+        if type.eql? PlaceAction
+          true
+        else
+          puts type
+          false
+        end
       end
 
       def update(action, game)

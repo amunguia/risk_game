@@ -30,68 +30,36 @@ module Risk
           players_arr.each do |p|
             game.set_cards_for_player(p, [])
           end
-
-          game.build_assignment_map
-          game.state = InitialPlaceState.new
+          
           game
         end
 
       end
       
       def attack(attacker, attacking_country, defending_country, attack_with)
-
+        self.play_action(attacker, AttackAction.new(attacker, self.owner_of(defending_country), 
+                   attacking_country, defending_country, attack_with))
       end
 
       def move(mover, move_from, move_to)
-
+        self.play_action(mover, MoveAction.new(mover, move_from, move_to))
       end
 
-      def no_move
-
+      def no_move(no_mover)
+        self.play_action(no_mover, NoMoveAction.new)
       end
 
       def place(placer, into_country, number_armies)
-
+        self.play_action(placer, PlaceAction.new(placer, into_country, number_armies))
       end
 
       def use_cards(user, cards_array)
-
+        self.play_action(user, UseCardsAction.new(user, cards_array))
       end
 
       def self.included(klass)
         klass.extend(CreateGame)
-        klass.extend(PlayGame)
       end
-
-      private 
-
-        module PlayGame 
-
-          def allow_action(user, action, game)
-            if !game.current_player.eql? 
-              "Not your turn"
-            elsif game.state.allows? action
-              "Cannot play this action at this time."
-            elsif action.valid_on? game
-              action.error_message  
-            else
-              true
-            end
-          end
-
-          def play_action(user,action, game)
-            error_message = allow_action(user, action, game)
-            
-            if !error_message
-              action.execute_on game
-              self.state = state.update(action, game)
-              self.state
-            else
-              error_message
-            end
-          end
-
-        end
 
     end
 

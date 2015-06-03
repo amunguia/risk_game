@@ -14,6 +14,8 @@ module Risk
         self.players = []
         self.players_to_setup = 0
         self.won = false
+        self.state = InitialPlaceState.new
+        self.build_assignment_map
         initial_army_map
       end
 
@@ -84,6 +86,18 @@ module Risk
         self.army_map = army_map
       end 
 
+      def play_action(user,action)
+        error_message = allow_action(user, action)
+        
+        if !error_message
+          action.execute_on self
+          self.state = state.update(action, self)
+          self.state
+        else
+          error_message
+        end
+      end
+
       def player_lose?(player)
         !self.assignment_map.values.include? player
       end
@@ -119,6 +133,18 @@ module Risk
       end
 
       private 
+
+      def allow_action(user, action)
+        if !self.current_player.eql? user
+          "Not your turn"
+        elsif !self.state.allows? action
+          "Cannot play this action at this time."
+        elsif action.valid_on? self
+          action.error_message  
+        else
+          true
+        end
+      end
 
       def initial_army_map
         countries = Board.countries
