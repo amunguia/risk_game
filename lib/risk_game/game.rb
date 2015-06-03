@@ -3,8 +3,8 @@ module Risk
   module Game
 
     class Game 
-      extend  GameCreation
-      include GameInterface      
+        
+      include API      
 
       attr_accessor :army_map, :assignment_map, :card_list, :cards, 
               :max_place, :minimum_move, :move_from, :move_to, :players, 

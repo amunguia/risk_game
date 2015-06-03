@@ -2,7 +2,7 @@ module Risk
 
   module Game
 
-    module GameInterface
+    module UtilityMethods
 
       # When including, ensure the following attr_accessors are provided
       #     'army_map'        - Hash(Symbol => Number)
