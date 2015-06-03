@@ -1,4 +1,4 @@
-module Risk
+ module Risk
 
   module Game
 
@@ -55,6 +55,10 @@ module Risk
 
       def current_player
         self.players[0]
+      end
+
+      def game_over?
+        self.state.class.eql? GameOverState
       end
 
       def give_player_card

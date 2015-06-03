@@ -32,12 +32,15 @@ module Risk::Game
     describe ".update" do
 
       context "AttackAction played" do
+
         before :each do 
           @action = AttackAction.new(1,2,:alaska,:kamchatka,3)
           @game = Game.new
+          @game.players = [1,2,3,4]
         end
 
         context "attacker won" do 
+
           it "returns type PostAttackMoveState" do 
             @action.won = true
             expect(@attack_state.update(@action, @game)).to be_kind_of(PostAttackMoveState)
@@ -48,12 +51,21 @@ module Risk::Game
             @attack_state.update(@action, @game)
             expect(@game.minimum_move).to be 3
           end
+
+          it "sets state to GameOver when last player defeater" do 
+            @action.won = true
+            @game.players = [1]
+            expect(@attack_state.update(@action, @game)).to be_kind_of(GameOverState)
+          end
+
         end
 
         context "attacker lost" do 
+
           it "returns self" do
             expect(@attack_state.update(@action, @game)).to be @attack_state
           end
+
         end
 
       end

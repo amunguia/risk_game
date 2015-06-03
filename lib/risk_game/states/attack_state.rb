@@ -13,6 +13,10 @@ module Risk
       end
 
       def update(action, game)
+        if game.players.length == 1 
+          return GameOverState.new
+        end
+
         case action.class.to_s
         when "Risk::Game::AttackAction"
           update_attack(action, game)
