@@ -19,10 +19,13 @@ module Risk
       def valid_on?(game)
         if !player_has_cards(game)
           @error_message = "Attempting to play another player's cards."
+
         elsif value_for_cards < 2
           @error_message = "Must submit at least 2 stars."
+
         elsif value_for_cards > 10
           @error_message = "Cannot submit more than 10 stars at a time."
+          
         end
 
         @error_message == nil

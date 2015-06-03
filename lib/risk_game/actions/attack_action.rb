@@ -32,22 +32,31 @@ module Risk
       def valid_on?(game)
         if !Board.countries.include?(attacking_country) 
           @error_message = "#{attacking_country.to_s} does not exist."
+
         elsif !Board.countries.include?(defending_country) 
           @error_message = "#{defending_country.to_s} does not exist."
+
         elsif !Board.are_adjacent?(attacking_country, defending_country)
           @error_message = "Countries are not adjacent."
+
         elsif game.owner_of(attacking_country) != attacker
           @error_message = "You do not own #{attacking_country.to_s}."
+
         elsif game.owner_of(defending_country) != defender
           @error_message = "Defender does not own #{defending_country.to_s}."
+
         elsif attacker == defender
           @error_message = "You cannot attack your own country."
+
         elsif (game.armies_in(attacking_country) < (attack_with + 1))
           @error_message = "You cannot attack with more than #{game.armies_in(attacking_country) - 1} armies."
+
         elsif attack_with > 3
           @error_message = "You cannot attack with more than 3 armies."
+
         elsif attack_with < 1
           @error_message = "You must attack with at least 1 army."
+          
         end
 
         @error_message == nil
