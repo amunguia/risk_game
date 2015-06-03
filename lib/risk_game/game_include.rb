@@ -98,6 +98,10 @@ module Risk
         self.army_map = army_map
       end 
 
+      def player_lose?(player)
+        !self.assignment_map.values.include? player
+      end
+
       def rolls
         @rolls || [[],[]]
       end
