@@ -20,7 +20,7 @@ module Risk::Game
 
     describe ".execute_on" do
       before :each do 
-        @game = Game.new
+        @game = Game.create_with_players [1,2]
         allow(@game).to receive(:cards_for_player).with(1).and_return(["Alaska","Alberta", "Congo", "Siam", "Yakutsk"])
       end
 
@@ -39,7 +39,7 @@ module Risk::Game
 
     describe ".valid_on?" do 
       before :each do 
-        @game = Game.new
+        @game = Game.create_with_players [1,2]
         allow(@game).to receive(:cards_for_player).with(1).and_return(["Alaska","Argentina", "Alberta"])
       end
 
@@ -60,6 +60,28 @@ module Risk::Game
           allow(@game).to receive(:cards_for_player).with(1).and_return(["Alaska", "Argentina"])
           @use_cards_action.valid_on? @game
           expect(@use_cards_action.error_message).to eq "Attempting to play another player's cards."          
+        end
+
+        it "returns false if the number of stars is less than 2" do 
+          allow(@use_cards_action).to receive(:value_for_cards).and_return(1)
+          expect(@use_cards_action.valid_on? @game).to be false
+        end
+
+        it "sets error_message when number of stars is less than 2" do 
+          allow(@use_cards_action).to receive(:value_for_cards).and_return(1)
+          @use_cards_action.valid_on? @game
+          expect(@use_cards_action.error_message).to eq "Must submit at least 2 stars."
+        end
+
+        it "returns false if the number of stars is greater than 10" do 
+          allow(@use_cards_action).to receive(:value_for_cards).and_return(11)
+          expect(@use_cards_action.valid_on? @game).to be false
+        end
+
+        it "sets error_message when number of stars is less than 10" do 
+          allow(@use_cards_action).to receive(:value_for_cards).and_return(11)
+          @use_cards_action.valid_on? @game
+          expect(@use_cards_action.error_message).to eq "Cannot submit more than 10 stars at a time."
         end
 
       end

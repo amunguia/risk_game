@@ -5,7 +5,7 @@ module Risk
     module GameCreation
 
       def create_with_players(players_arr)
-        game = Game.new
+        game = self.new
         game.init
         game.set_players players_arr
         game.players_to_setup = players_arr.length

@@ -20,7 +20,7 @@ module Risk::Game
 
     describe ".execute_on" do 
       before :each do 
-        @game = Game.new
+        @game = Game.create_with_players [1,2,3,4]
       end
 
       it "increases the number of armies in the destination country" do 

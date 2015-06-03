@@ -117,7 +117,7 @@ module Risk::Game
     describe ".valid_on?" do 
 
       before :each do 
-        @game = Game.new
+        @game = Game.create_with_players [1,2]
         allow(@game).to receive(:owner_of).with(:alaska).and_return(1)
         allow(@game).to receive(:owner_of).with(:kamchatka).and_return(2)
         allow(@game).to receive(:armies_in).with(:alaska).and_return(10)

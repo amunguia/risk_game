@@ -22,16 +22,10 @@ module Risk
         game.place_armies_in(attacking_country, -attacker_losses)
         game.place_armies_in(defending_country, -defender_losses)
 
-        self.won = game.armies_in(defending_country) == 0
-        game.won = self.won
+        self.won =  game.won = game.armies_in(defending_country) == 0
 
         if game.won
-          game.set_owner_of(defending_country, attacker)
-          game.move_from = attacking_country
-          game.move_to = defending_country
-          if game.player_lose? defender 
-            game.remove_player defender
-          end
+          update_game_on_win game
         end
       end
 
@@ -57,6 +51,17 @@ module Risk
         end
 
         @error_message == nil
+      end
+
+      private 
+
+      def update_game_on_win(game)
+        game.set_owner_of(defending_country, attacker)
+        game.move_from = attacking_country
+        game.move_to = defending_country
+        if game.player_lose? defender 
+          game.remove_player defender
+        end
       end
 
     end

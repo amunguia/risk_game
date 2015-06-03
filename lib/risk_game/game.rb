@@ -10,10 +10,6 @@ module Risk
               :max_place, :minimum_move, :move_from, :move_to, :players, 
               :players_to_setup, :state, :won
 
-      def initialize
-        self.init
-      end
-
     end
 
   end
