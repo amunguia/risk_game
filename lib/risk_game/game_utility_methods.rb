@@ -15,25 +15,12 @@
         self.players_to_setup = 0
         self.won = false
         self.state = InitialPlaceState.new
-        self.build_assignment_map
+        build_assignment_map
         initial_army_map
       end
 
       def armies_for(player_id)
         Board.points_for(self.assignment_map.select {|key, value| value == player_id}.keys)
-      end
-
-      def build_assignment_map
-        countries = Board.countries.shuffle
-        ps = players
-
-        assignment_map = {}
-        countries.each do |country|
-          assignment_map[country] = ps[0]
-          ps = ps.drop(1) << ps[0]
-        end
-
-        self.assignment_map = assignment_map
       end
 
       def cards_for_player(player_id)
@@ -129,6 +116,19 @@
         else
           true
         end
+      end
+
+      def build_assignment_map
+        countries = Board.countries.shuffle
+        ps = players
+
+        assignment_map = {}
+        countries.each do |country|
+          assignment_map[country] = ps[0]
+          ps = ps.drop(1) << ps[0]
+        end
+
+        self.assignment_map = assignment_map
       end
 
       def initial_army_map
