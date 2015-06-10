@@ -17,7 +17,6 @@
         self.players_to_setup = 0
         self.won = false
         self.state = InitialPlaceState.new
-        build_assignment_map
         initial_army_map
       end
 
@@ -90,10 +89,8 @@
         self.players = players
       end
 
-      def set_cards_for_player(player_id, cards)
-        saved_cards = self.cards
-        saved_cards[player_id] = cards
-        self.cards = saved_cards
+      def set_cards_for_player(player_id, cs)
+        self.cards[player_id] = cs
       end
 
       def set_players(players)
