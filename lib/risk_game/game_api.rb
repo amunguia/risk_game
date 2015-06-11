@@ -6,10 +6,11 @@ module Risk
     #     'army_map'        - Hash(Symbol => Number)
     #     'assignment_map'  - Hash(Symbol => Number)
     #     'card_list'       - String 
-    #     'cards'           - Array(Number)
+    #     'cards'           - Hash(Number => Array(Number))
     #     'max_place'       - Number
     #     'minimum_move'    - Number
     #     'move_from'       - Symbol
+    #     'move_to'         - Symbol
     #     'players'         - Array(Number)
     #     'players_to_setup'- Number
     #     'state'           - State
@@ -54,8 +55,8 @@ module Risk
         self.state.class.eql? GameOverState
       end
 
-      def move(mover, move_from, move_to)
-        self.play_action(mover, MoveAction.new(mover, move_from, move_to))
+      def move(mover, move_from, move_to, num_armies)
+        self.play_action(mover, MoveAction.new(move_from, move_to, num_armies))
       end
 
       def no_move(no_mover)

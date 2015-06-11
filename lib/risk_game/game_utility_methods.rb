@@ -4,7 +4,7 @@
 
     module UtilityMethods
 
-      attr_reader :error_message
+      #attr_reader :error_message
 
       INITIAL_ARMIES = 20
 
@@ -73,14 +73,14 @@
       end 
 
       def play_action(user,action)
-        @error_message = allow_action(user, action)
+        invalid = allow_action(user, action)
         
-        if !error_message
+        if !invalid
           action.execute_on self
           self.state = state.update(action, self)
           self.state
         else
-          error_message
+          self.error_message = action.error_message
         end
       end
 

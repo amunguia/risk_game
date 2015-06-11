@@ -6,7 +6,7 @@ module Risk
         
       include API      
 
-      attr_accessor :army_map, :assignment_map, :card_list, :cards, 
+      attr_accessor :army_map, :assignment_map, :card_list, :cards, :error_message,
               :max_place, :minimum_move, :move_from, :move_to, :players, 
               :players_to_setup, :state, :won
 
