@@ -16,6 +16,7 @@ module Risk
           game.place_armies_in(destination_country, number_armies)
           game.place_armies_in(source_country, -1 * number_armies)
           "moved #{number_armies} from #{source_country} to #{destination_country}"
+          "Moved #{number_armies} from #{Board.name_for source_country} to #{Board.name_for destination_country}."
         end
 
         def valid_on?(game)

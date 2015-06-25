@@ -14,7 +14,7 @@ module Risk
       def execute_on(game)
         game.max_place += value_for_stars
         update_cards(game)
-        "turned in cards worth #{value_for_stars}"
+        "Turned in cards worth #{value_for_stars}"
       end
 
       def valid_on?(game)

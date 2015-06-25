@@ -31,7 +31,7 @@ module Risk
         win_loss     = game.won ? "won" : "lost"
         attack_rolls = game.rolls[0].join(",")
         defend_rolls = game.rolls[1].join(",")
-        "attacked #{defending_country} from #{attacking_country}. Attacker rolled #{attack_rolls}. Defender rolled #{defend_rolls}. Attacker #{win_loss}."
+        "#{Board.name_for attacking_country} attacked #{Board.name_for defending_country}.\nDefender rolled #{defend_rolls}. Attacker #{win_loss}."
       end
 
       def valid_on?(game)

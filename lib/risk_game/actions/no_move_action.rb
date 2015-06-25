@@ -7,7 +7,7 @@ module Risk
       
 
       def execute_on(game)
-        "ended turn."
+        ""
       end
 
       def valid_on?(game)
