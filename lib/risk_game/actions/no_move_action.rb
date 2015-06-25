@@ -3,9 +3,11 @@ module Risk
   module Game
 
     class NoMoveAction < Action 
+    
+      
 
       def execute_on(game)
-        true
+        "ended turn."
       end
 
       def valid_on?(game)

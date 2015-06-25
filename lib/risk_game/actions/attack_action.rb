@@ -5,7 +5,7 @@ module Risk
     class AttackAction < Action
 
       attr_reader :attacker, :defender, :attacking_country, :defending_country,
-                  :attack_with, :error_message
+                  :attack_with, :error_message, :action_message
 
       attr_accessor :won
 
@@ -27,6 +27,11 @@ module Risk
         if game.won
           update_game_on_win game
         end
+
+        win_loss     = game.won ? "won" : "lost"
+        attack_rolls = game.rolls[0].join(",")
+        defend_rolls = game.rolls[1].join(",")
+        "attacked #{defending_country} from #{attacking_country}. Attacker rolled #{attack_rolls}. Defender rolled #{defend_rolls}. Attacker #{win_loss}."
       end
 
       def valid_on?(game)

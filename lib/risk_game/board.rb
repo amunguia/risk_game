@@ -100,10 +100,10 @@
             :ural => [:ukraine, :afghanistan, :china, :siberia],
             :yakutsk => [:siberia, :irkutsk, :kamchatka],
 
-            :eastern_au => [:western_au, :new_guinea, :indonesia],
-            :indonesia => [:siam, :eastern_au, :new_guinea],
+            :eastern_au => [:western_au, :new_guinea],
+            :indonesia => [:siam, :western_au, :new_guinea],
             :new_guinea => [:indonesia, :eastern_au, :western_au],
-            :western_au => [:eastern_au, :new_guinea]
+            :western_au => [:eastern_au, :new_guinea, :indonesia]
         }
       end
 

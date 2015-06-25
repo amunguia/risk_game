@@ -4,6 +4,8 @@ module Risk
 
     class MoveAfterWinAction < MoveAction 
 
+      attr_reader :error_message
+
       def valid_on?(game)
         if ! super
         elsif !(game.move_from.eql? source_country)

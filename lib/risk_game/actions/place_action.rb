@@ -15,6 +15,7 @@ module Risk
       def execute_on(game)
         game.place_armies_in(destination_country, number_armies)
         game.max_place -= number_armies
+        "placed #{number_armies} in #{destination_country}"
       end
 
       def valid_on?(game) 

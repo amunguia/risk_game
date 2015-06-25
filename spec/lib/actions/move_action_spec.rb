@@ -71,6 +71,11 @@ module Risk::Game
           expect(action.valid_on? @game).to be false
         end
 
+        it "returns false if number_armies < 1" do 
+          action = MoveAction.new(:alaska, :argentina, 0)
+          expect(action.valid_on? @game).to be false
+        end
+
         it "sets error_message if countries are not adjacent" do 
           action = MoveAction.new(:alaska, :argentina, 3)
           action.valid_on? @game

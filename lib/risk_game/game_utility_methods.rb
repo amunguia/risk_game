@@ -4,7 +4,7 @@
 
     module UtilityMethods
 
-      #attr_reader :error_message
+
 
       INITIAL_ARMIES = 20
 
@@ -76,7 +76,7 @@
         invalid = allow_action(user, action)
         
         if !invalid
-          action.execute_on self
+          self.action_message = action.execute_on self
           self.state = state.update(action, self)
           self.state
         else
@@ -123,10 +123,10 @@
           "Not your turn"
         elsif !self.state.allows? action
           "Cannot play this action at this time."
-        elsif action.valid_on? self
+        elsif !action.valid_on? self
           action.error_message  
         else
-          true
+          false
         end
       end
 

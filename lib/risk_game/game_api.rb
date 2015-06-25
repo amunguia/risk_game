@@ -20,6 +20,8 @@ module Risk
       
       include UtilityMethods
 
+      attr_accessor :action_message
+
       module CreateGame
           
         def create_with_players(players_arr)
