@@ -27,6 +27,17 @@
           "Europe", "Africa", "Asia", "Australia"])
       end
 
+      def self.continent_points(countries)
+        points  = 0
+        points += (africa - countries).empty? ? 3 : 0
+        points += (asia - countries).empty? ? 7 : 0
+        points += (australia - countries).empty? ? 2 : 0
+        points += (europe - countries).empty? ? 5 : 0
+        points += (north_america - countries).empty? ? 5 : 0
+        points += (south_america - countries).empty? ? 2 : 0
+        points
+      end
+
       def self.countries
         @adjacent_map.keys
       end
@@ -42,15 +53,33 @@
       def self.points_for(countries)
         points = countries.length / 3
         points = points < 3 ? 3 : points
-
-        points += (africa - countries).empty? ? 3 : 0
-        points += (asia - countries).empty? ? 7 : 0
-        points += (australia - countries).empty? ? 2 : 0
-        points += (europe - countries).empty? ? 5 : 0
-        points += (north_america - countries).empty? ? 5 : 0
-        points += (south_america - countries).empty? ? 2 : 0
+        points += continent_points countries
 
         points
+      end
+
+      def self.africa 
+        [:congo, :east_af, :egypt, :madagascar, :north_af, :south_af]
+      end
+
+      def self.asia 
+        [:afghanistan, :china, :india, :irkutsk, :japan, :kamchatka, :middle_ea, :mongolia, :siam, :siberia, :ural, :yakutsk]
+      end
+
+      def self.australia 
+        [:eastern_au, :indonesia, :new_guinea, :western_au]
+      end
+
+      def self.europe 
+        [:great_br, :iceland, :northern_eu, :scandanavia, :southern_eu, :ukraine, :western_eu]
+      end
+
+      def self.north_america
+        [:alaska, :alberta, :central_am, :eastern_us, :greenland, :northwest_te, :ontario, :quebec, :western_us]
+      end
+
+      def self.south_america
+        [:argentina, :brazil, :peru, :venezuela]
       end
 
       private 
@@ -161,30 +190,6 @@
 
       build_name_map
       build_adjacent_map
-  
-      def self.africa 
-        [:congo, :east_af, :egypt, :madagascar, :north_af, :south_af]
-      end
-
-      def self.asia 
-        [:afghanistan, :china, :india, :irkutsk, :japan, :kamchatka, :middle_ea, :mongolia, :siam, :siberia, :ural, :yakutsk]
-      end
-
-      def self.australia 
-        [:eastern_au, :indonesia, :new_guinea, :western_au]
-      end
-
-      def self.europe 
-        [:great_br, :iceland, :northern_eu, :scandanavia, :southern_eu, :ukraine, :western_eu]
-      end
-
-      def self.north_america
-        [:alaska, :alberta, :central_am, :eastern_us, :greenland, :northwest_te, :ontario, :quebec, :western_us]
-      end
-
-      def self.south_america
-        [:argentina, :brazil, :peru, :venezuela]
-      end
 
     end
 
