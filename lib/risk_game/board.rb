@@ -6,7 +6,7 @@
 
       def self.adjacent_to country
         if @adjacent_map.keys.include? country
-          @adjacent_map[country]
+          (@adjacent_map[country]).map { |c| c } # copy the array0
         else
           raise CountryDoesNotExist
         end
